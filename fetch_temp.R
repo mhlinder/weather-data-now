@@ -1,4 +1,6 @@
 
+## Fetch monthly temperature data for a given weather station
+
 library(magrittr)
 library(dplyr)
 
@@ -17,7 +19,7 @@ elem_template <- function(field) {
 elems <- c("avgt", "hdd")
 
 params <-
-    list(sid   = "strc3",
+    list(sid   = "strc3",  ## Storrs, CT
          sdate = "2007-01-01",
          edate = as.character(Sys.Date()),
          elems = lapply(elems, elem_template))
@@ -25,6 +27,7 @@ params <-
 query <-
     params %>%
     toJSON(auto_unbox = TRUE) %>%
+    ## Encode JSON parameter list
     URLencode %>%
     sprintf(urlbase, .)
 
